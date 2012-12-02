@@ -8,4 +8,4 @@ if ! which sshpass >/dev/null; then
 fi
 
 #Username: bandit4 Password: pIwrPrtPN36QITSp3EQaw936yaFoFgAB
-sshpass -p "pIwrPrtPN36QITSp3EQaw936yaFoFgAB" ssh -l "bandit4" vortex.labs.overthewire.org "cat `file ./inhere/-file0* | grep ASCII | cut -d: -f1`"
+sshpass -p "pIwrPrtPN36QITSp3EQaw936yaFoFgAB" ssh -l "bandit4" vortex.labs.overthewire.org 'cat `file ./inhere/-file0*|grep ASCII|cut -d: -f1`'
