@@ -9,8 +9,8 @@ fi
 
 #Username: bandit13 Password: 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
 # will create file ~/.ssh/bandit.labs.overthewire.org
-sshpass -p "8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL" ssh -l 'bandit13' bandit.labs.overthewire.org 'cat sshkey.private' > ~/.ssh/bandit.labs.overthewire.org
-chmod 600 ~/.ssh/bandit.labs.overthewire.org
+sshpass -p "8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL" ssh -l 'bandit13' bandit.labs.overthewire.org 'cat sshkey.private' > /tmp/bandit14_key
+chmod 600 /tmp/bandit14_key
 
 #connect as bandit14
-ssh -i ~/.ssh/bandit.labs.overthewire.org -l 'bandit14' bandit.labs.overthewire.org 'cat /etc/bandit_pass/bandit14'
+ssh -i /tmp/bandit14_key -l 'bandit14' bandit.labs.overthewire.org 'cat /etc/bandit_pass/bandit14'
