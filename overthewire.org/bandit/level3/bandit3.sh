@@ -8,4 +8,4 @@ if ! which sshpass >/dev/null; then
 fi
 
 #Username: bandit3 Password: UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
-sshpass -p "UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK" ssh -l "bandit3" vortex.labs.overthewire.org "cat inhere/.hidden"
+sshpass -p "UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK" ssh -l "bandit3" bandit.labs.overthewire.org "cat inhere/.hidden"

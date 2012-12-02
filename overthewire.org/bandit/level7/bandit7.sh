@@ -8,4 +8,4 @@ if ! which sshpass >/dev/null; then
 fi
 
 #Username: bandit7 Password: HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
-sshpass -p "HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs" ssh -l "bandit7" vortex.labs.overthewire.org 'grep millionth data.txt'
+sshpass -p "HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs" ssh -l "bandit7" bandit.labs.overthewire.org 'grep millionth data.txt'

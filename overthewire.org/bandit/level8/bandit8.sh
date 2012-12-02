@@ -8,4 +8,4 @@ if ! which sshpass >/dev/null; then
 fi
 
 #Username: bandit8 Password: cvX2JJa4CFALtqS87jk27qwqGhBM9plV
-sshpass -p "cvX2JJa4CFALtqS87jk27qwqGhBM9plV" ssh -l "bandit8" vortex.labs.overthewire.org 'sort data.txt | uniq -u'
+sshpass -p "cvX2JJa4CFALtqS87jk27qwqGhBM9plV" ssh -l "bandit8" bandit.labs.overthewire.org 'sort data.txt | uniq -u'
