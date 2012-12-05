@@ -15,9 +15,16 @@ Reading Material
 CHALLENGE_CONTENT
 
 Comment by me:
-	- save list of socks server from : http://spys.ru/en/socks-proxy-list/ or http://sockslist.net/list/proxy-socks-5-list/ into 'socks.list'
+	- save list of socks server from : 
+		- https://www.facebook.com/freevipsocks5proxylist
+		- http://spys.ru/en/socks-proxy-list/
+		- http://sockslist.net/list/proxy-socks-5-list/ into 'socks.list'
 	- run check_sock.rb to check if the socks server is available
-		- command 'while read i; do (./check_sock.rb $i 2>/dev/null >>working_socks.list) & done < socks.list'
-		- since it starts all scripts in background mode, to kill them runs 'killall ruby'
+		- command '
+		while read i; do (./check_sock.rb $i 2>/dev/null >>working_socks.list) & done < socks.list
+
+		- since it starts all scripts in background mode, to kill them runs 
+		killall ruby
+
 	- run programm using this command
-		- while read i; do (./semtex5.rb $i 2>/dev/null) &  done < working_socks.list
+		while read i; do (./semtex5.rb $i 2>/dev/null) & sleep 1; done < working_socks.list
