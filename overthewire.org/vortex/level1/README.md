@@ -1,3 +1,52 @@
+Challenge URL is <a href="http://www.overthewire.org/wargames/vortex/vortex1.shtml">HERE</a>
+
+<<<CHALLENGE_CONTENT
+Level 1
+
+Canary Values
+We are looking for a specific value in ptr. You may need to consider how bash handles EOF..
+Reading Material
+Smashing the Stack for Fun and Profit
+Code listing (vortex1.c)
+<pre>
+ 1 #include <stdlib.h>
+ 2 #include <unistd.h>
+ 3 #include <string.h>
+ 4 #include <stdio.h>
+ 5 
+ 6 
+ 7 #define e(); if(((unsigned int)ptr & 0xff000000)==0xca000000) { setresuid(geteuid(), geteuid(), geteuid()); execlp("/bin/sh", "sh", "-i", NULL); }
+ 8 
+ 9 void print(unsigned char *buf, int len)
+10 {
+11         int i;
+12 
+13         printf("[ ");
+14         for(i=0; i < len; i++) printf("%x ", buf[i]); 
+15         printf(" ]\n");
+16 }
+17 
+18 int main()
+19 {
+20         unsigned char buf[512];
+21         unsigned char *ptr = buf + (sizeof(buf)/2);
+22         unsigned int x;
+23 
+24         while((x = getchar()) != EOF) {
+25                 switch(x) {
+26                         case '\n': print(buf, sizeof(buf)); continue; break;
+27                         case '\\': ptr--; break; 
+28                         default: e(); if(ptr > buf + sizeof(buf)) continue; ptr++[0] = x; break;
+29                 }
+30         }
+31         printf("All done\n");
+32 }
+</pre>
+
+CHALLENGE_CONTENT
+
+Comment by me:
+
 ESP --> 0xffffd520
 ptr = 0x18(ESP) = 0xffffd538 --> 0xffffd63c
 buffer = 0x1c(ESP) = 0xffffd53c
