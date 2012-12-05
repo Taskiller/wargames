@@ -1,0 +1,74 @@
+Dump of assembler code for function main:
+   0x08048557 <+0>:	push   %ebp
+   0x08048558 <+1>:	mov    %esp,%ebp
+=> 0x0804855a <+3>:	and    $0xfffffff0,%esp
+   0x0804855d <+6>:	push   %esi
+   0x0804855e <+7>:	push   %ebx
+   0x0804855f <+8>:	sub    $0x228,%esp
+   0x08048565 <+14>:	mov    %gs:0x14,%eax
+   0x0804856b <+20>:	mov    %eax,0x21c(%esp)
+   0x08048572 <+27>:	xor    %eax,%eax
+   0x08048574 <+29>:	lea    0x1c(%esp),%eax
+   0x08048578 <+33>:	add    $0x100,%eax
+   0x0804857d <+38>:	mov    %eax,0x18(%esp)
+   0x08048581 <+42>:	jmp    0x8048625 <main+206>
+   0x08048586 <+47>:	mov    0x14(%esp),%eax
+   0x0804858a <+51>:	cmp    $0xa,%eax
+   0x0804858d <+54>:	je     0x8048596 <main+63>
+   0x0804858f <+56>:	cmp    $0x5c,%eax
+   0x08048592 <+59>:	je     0x80485ac <main+85>
+   0x08048594 <+61>:	jmp    0x80485b3 <main+92>
+   0x08048596 <+63>:	movl   $0x200,0x4(%esp)
+   0x0804859e <+71>:	lea    0x1c(%esp),%eax
+   0x080485a2 <+75>:	mov    %eax,(%esp)
+   0x080485a5 <+78>:	call   0x8048504 <print>
+   0x080485aa <+83>:	jmp    0x8048625 <main+206>
+   0x080485ac <+85>:	subl   $0x1,0x18(%esp)
+   0x080485b1 <+90>:	jmp    0x8048625 <main+206>
+   0x080485b3 <+92>:	mov    0x18(%esp),%eax
+   0x080485b7 <+96>:	and    $0xff000000,%eax
+   0x080485bc <+101>:	cmp    $0xca000000,%eax
+   0x080485c1 <+106>:	jne    0x8048602 <main+171>
+   0x080485c3 <+108>:	call   0x8048440 <geteuid@plt>
+   0x080485c8 <+113>:	mov    %eax,%esi
+   0x080485ca <+115>:	call   0x8048440 <geteuid@plt>
+   0x080485cf <+120>:	mov    %eax,%ebx
+   0x080485d1 <+122>:	call   0x8048440 <geteuid@plt>
+   0x080485d6 <+127>:	mov    %esi,0x8(%esp)
+   0x080485da <+131>:	mov    %ebx,0x4(%esp)
+   0x080485de <+135>:	mov    %eax,(%esp)
+   0x080485e1 <+138>:	call   0x80483f0 <setresuid@plt>
+   0x080485e6 <+143>:	movl   $0x0,0x8(%esp)
+   0x080485ee <+151>:	movl   $0x804873a,0x4(%esp)
+   0x080485f6 <+159>:	movl   $0x804873d,(%esp)
+   0x080485fd <+166>:	call   0x8048400 <execlp@plt>
+   0x08048602 <+171>:	lea    0x1c(%esp),%eax
+   0x08048606 <+175>:	add    $0x200,%eax
+   0x0804860b <+180>:	cmp    0x18(%esp),%eax
+   0x0804860f <+184>:	jb     0x8048624 <main+205>
+   0x08048611 <+186>:	mov    0x14(%esp),%eax
+   0x08048615 <+190>:	mov    %eax,%edx
+   0x08048617 <+192>:	mov    0x18(%esp),%eax
+   0x0804861b <+196>:	mov    %dl,(%eax)
+   0x0804861d <+198>:	addl   $0x1,0x18(%esp)
+   0x08048622 <+203>:	jmp    0x8048625 <main+206>
+   0x08048624 <+205>:	nop
+   0x08048625 <+206>:	call   0x80483c0 <getchar@plt>
+   0x0804862a <+211>:	mov    %eax,0x14(%esp)
+   0x0804862e <+215>:	cmpl   $0xffffffff,0x14(%esp)
+   0x08048633 <+220>:	jne    0x8048586 <main+47>
+   0x08048639 <+226>:	movl   $0x8048745,(%esp)
+   0x08048640 <+233>:	call   0x8048430 <puts@plt>
+   0x08048645 <+238>:	mov    $0x0,%eax
+   0x0804864a <+243>:	mov    0x21c(%esp),%edx
+   0x08048651 <+250>:	xor    %gs:0x14,%edx
+   0x08048658 <+257>:	je     0x804865f <main+264>
+   0x0804865a <+259>:	call   0x8048420 <__stack_chk_fail@plt>
+   0x0804865f <+264>:	add    $0x228,%esp
+   0x08048665 <+270>:	pop    %ebx
+   0x08048666 <+271>:	pop    %esi
+   0x08048667 <+272>:	mov    %ebp,%esp
+   0x08048669 <+274>:	pop    %ebp
+   0x0804866a <+275>:	ret    
+
+
