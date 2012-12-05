@@ -8,40 +8,39 @@ We are looking for a specific value in ptr. You may need to consider how bash ha
 Reading Material
 Smashing the Stack for Fun and Profit
 Code listing (vortex1.c)
-<pre>
- 1 #include <stdlib.h>
- 2 #include <unistd.h>
- 3 #include <string.h>
- 4 #include <stdio.h>
- 5 
- 6 
- 7 #define e(); if(((unsigned int)ptr & 0xff000000)==0xca000000) { setresuid(geteuid(), geteuid(), geteuid()); execlp("/bin/sh", "sh", "-i", NULL); }
- 8 
- 9 void print(unsigned char *buf, int len)
-10 {
-11         int i;
-12 
-13         printf("[ ");
-14         for(i=0; i < len; i++) printf("%x ", buf[i]); 
-15         printf(" ]\n");
-16 }
-17 
-18 int main()
-19 {
-20         unsigned char buf[512];
-21         unsigned char *ptr = buf + (sizeof(buf)/2);
-22         unsigned int x;
-23 
-24         while((x = getchar()) != EOF) {
-25                 switch(x) {
-26                         case '\n': print(buf, sizeof(buf)); continue; break;
-27                         case '\\': ptr--; break; 
-28                         default: e(); if(ptr > buf + sizeof(buf)) continue; ptr++[0] = x; break;
-29                 }
-30         }
-31         printf("All done\n");
-32 }
-</pre>
+
+	 1 #include <stdlib.h>
+	 2 #include <unistd.h>
+	 3 #include <string.h>
+	 4 #include <stdio.h>
+	 5 
+	 6 
+	 7 #define e(); if(((unsigned int)ptr & 0xff000000)==0xca000000) { setresuid(geteuid(), geteuid(), geteuid()); execlp("/bin/sh", "sh", "-i", NULL); }
+	 8 
+	 9 void print(unsigned char *buf, int len)
+	10 {
+	11         int i;
+	12 
+	13         printf("[ ");
+	14         for(i=0; i < len; i++) printf("%x ", buf[i]); 
+	15         printf(" ]\n");
+	16 }
+	17 
+	18 int main()
+	19 {
+	20         unsigned char buf[512];
+	21         unsigned char *ptr = buf + (sizeof(buf)/2);
+	22         unsigned int x;
+	23 
+	24         while((x = getchar()) != EOF) {
+	25                 switch(x) {
+	26                         case '\n': print(buf, sizeof(buf)); continue; break;
+	27                         case '\\': ptr--; break; 
+	28                         default: e(); if(ptr > buf + sizeof(buf)) continue; ptr++[0] = x; break;
+	29                 }
+	30         }
+	31         printf("All done\n");
+	32 }
 
 CHALLENGE_CONTENT
 
@@ -100,18 +99,20 @@ OTHER WORK:
 		- s   or   si				<<< (step) run next instruction, step into
 		- start 					<<< just start the process, but not run
 
+	- SOME ASSEMBLY
+		0x080485b3 <+92>:	mov    0x18(%esp),%eax	<<<<<< where it reads from 'ptr'
+		0x080485b7 <+96>:	and    $0xff000000,%eax
+		0x080485bc <+101>:	cmp    $0xca000000,%eax		<<<<<< change to eax to 0xca000000
+		0x080485c1 <+106>:	jne    0x8048602 <main+171> 	
+		0x080485c3 <+108>:	call   0x8048440 <geteuid@plt>
+		0x080485c8 <+113>:	mov    %eax,%esi
+		0x080485ca <+115>:	call   0x8048440 <geteuid@plt>
+		0x080485cf <+120>:	mov    %eax,%ebx
+		0x080485d1 <+122>:	call   0x8048440 <geteuid@plt>
+
+
 	- Conclusion with gdb debugging
 		- easy to navigate and override the process flow. I can set any register to be anything as I want. 
 		- the flaw is, when 'gdb' starts, it starts with our EUID (which is vortex1). When it spawn /vortex/vortex1 afterward, the process also has EUID=vortex1, which leads to /bin/sh to get the same EUID as vortex1 too.
-
-0x080485b3 <+92>:	mov    0x18(%esp),%eax	<<<<<< where it reads from 'ptr'
-0x080485b7 <+96>:	and    $0xff000000,%eax
-0x080485bc <+101>:	cmp    $0xca000000,%eax		<<<<<< change to eax to 0xca000000
-0x080485c1 <+106>:	jne    0x8048602 <main+171> 	
-0x080485c3 <+108>:	call   0x8048440 <geteuid@plt>
-0x080485c8 <+113>:	mov    %eax,%esi
-0x080485ca <+115>:	call   0x8048440 <geteuid@plt>
-0x080485cf <+120>:	mov    %eax,%ebx
-0x080485d1 <+122>:	call   0x8048440 <geteuid@plt>
 
 	23anbT\rE
