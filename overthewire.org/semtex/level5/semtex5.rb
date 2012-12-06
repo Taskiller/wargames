@@ -9,7 +9,11 @@ require 'socket'
 require 'open-uri'
 require 'socksify'
 
+$DEBUG = false;
 LEVEL5_PASSWORD = 'HELICOTRMA'
+WARGAME_SERVER = 'semtex.labs.overthewire.org'	# '127.0.0.1'
+WARGAME_PORT = 24027
+BasicSocket.do_not_reverse_lookup = true
 
 # set proxy to TOR server(or other socks server)
 if ARGV.size >0 
@@ -18,64 +22,28 @@ if ARGV.size >0
 	TCPSocket::socks_port = $2
 end
 
-def check_ip
-	open('http://ifconfig.me/ip') do |page|
-		ip = page.read.chomp
-		puts "Current IP = #{ip}"
-		return ip
-	end
-end
-
-ip = check_ip
-
-Socket.tcp 'semtex.labs.overthewire.org', 24027 do |sock|
-	puts 'Receiving...'
-	data = sock.recv(10)
-	#data = sock.read 	# read 10 characters
-	puts "Data=#{data.inspect}"
-	puts "Data Size=#{data.size}"
-	if data.size<10
-		puts 'Error! Receiving data must equal to 10'
+# connect to server
+TCPSocket.open WARGAME_SERVER, WARGAME_PORT do |sock|
+	puts "Address: #{sock.peeraddr.inspect}"
+	puts 'Receiving...'	if $DEBUG
+	data = sock.readpartial(11) 	# read 1..10 characters, but spare +1 if has \r
+	puts "Data=#{data.inspect}"		if $DEBUG
+	puts "Data Size=#{data.size}"	if $DEBUG
+	if data.nil? or data.size<10
+		puts 'Error! Receiving data must equal to 10'	if $DEBUG
 		sock.close
 		exit 1
-	elsif data.size>10
-		puts "PASSWORD MUST BE IN HERE #{data}"
-		sock.close
-		exit 0
 	end
 
 	#input XOR level5's password , byte by byte
 	out = data.unpack('C*').zip(LEVEL5_PASSWORD.unpack('C*')).map{|arr| arr[0]^arr[1] }
-	#p data.unpack('C*')
-	#p LEVEL5_PASSWORD.unpack('C*')
-	#p out
 	
 	#send it to server
-	puts 'Sending...'
-	out = out + 'ANIDEARST5'.unpack('C*')
-	p out.pack('C*')
-	sock.send(out.pack('C*'),0)
-	sock.close_write
-	#sendmsg_nonblock(out.pack('C*'),0,nil)
-	puts "OUTPUT>>>>"+sock.read
-	sock.close
-	exit
-
-	#add unique id
-	#puts 'Sending unique id...'
-	#sock.send('AnidearST5',0)
-
-	#wait to see if any data is sent back, until connection is closed
-=begin
-	until sock.closed?
-		begin
-			data = sock.recv_nonblock(100)
-			puts "OUTPUT from #{ip} >>> #{data}" if data.size>0
-			break if data.size>0
-		rescue IO::WaitReadable
-			IO.select([sock])
-			retry
-		end
-	end
-=end
+	puts 'Sending...'	if $DEBUG
+	out = out + 'AnidearSt5'.unpack('C*')
+	p out.pack('C*')	if $DEBUG
+	sock.puts(out.pack('C*'))
+	password = sock.readpartial(100)	## Wait for data
+	puts "PASSWORD>>>>"+password.gsub(/[ \n\r]/,'')
+	#again_mue5li
 end
