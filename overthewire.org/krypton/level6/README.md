@@ -62,4 +62,24 @@ HINT2
 
 
 Comment by me:
-	-
+	- Providing the /krypton/krypton6/encrypt6 program, I created 4 plaintext files and 4 cipher files
+		python -c 'print "A"*1000' > /tmp/anidear_plain1
+		python -c 'print "B"*1000' > /tmp/anidear_plain2
+		python -c 'print "C"*1000' > /tmp/anidear_plain3
+		python -c 'print "Z"*1000' > /tmp/anidear_plain4
+		/krypton/krypton6/encrypt6 /tmp/anidear_plain1 /tmp/anidear_cipher1
+		/krypton/krypton6/encrypt6 /tmp/anidear_plain2 /tmp/anidear_cipher2
+		/krypton/krypton6/encrypt6 /tmp/anidear_plain3 /tmp/anidear_cipher3
+		/krypton/krypton6/encrypt6 /tmp/anidear_plain4 /tmp/anidear_cipher4
+	- After looking into each cipher, I found the cipher repeats every 30 characters. So this might be the limitation of the algorithm.
+	- Further, I put plaintext and ciphertext together for the first 3 sets.
+		AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA	--->  EICTDGYIYZKTHNSIRFXYCPFUEOCKRN
+		BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB  --->  FJDUEHZJZALUIOTJSGYZDQGVFPDLSO
+		CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC  --->  GKEVFIAKABMVJPUKTHZAERHWGQEMTP
+	- I found that, on the same position, the character is increased by one. So, it's Vigenère cipher again. This time is just with 30 characters long.
+	- With the mapping: 
+		AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA	--->  EICTDGYIYZKTHNSIRFXYCPFUEOCKRN
+	I can translate the ciphertext 'PNUKLYLWRQKGKBE' back to the password for next level
+
+
+
