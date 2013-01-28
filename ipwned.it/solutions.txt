@@ -1,0 +1,11 @@
+http://ipwned.it/challenge/1.html
+...
+...
+
+http://ipwned.it/challenge/2.html
+http://ipwned.it/doppel/index.php
+<!-- key:d0uble_w4lker -->
+
+http://ipwned.it/challenge/3.html
+http://ipwned.it/challenge/blackout/index.php~
+$key = "key#0h_sh1t_b4ckup";
