@@ -1,0 +1,63 @@
+Dump of assembler code for function main:
+   0x080483d4 <+0>:	push   %ebp
+   0x080483d5 <+1>:	mov    %esp,%ebp
+=> 0x080483d7 <+3>:	and    $0xfffffff0,%esp
+   0x080483da <+6>:	sub    $0xa0,%esp
+   0x080483e0 <+12>:	movl   $0x804963c,0x9c(%esp)  <<< lpp = &lp
+   0x080483eb <+23>:	cmpl   $0x2,0x8(%ebp)         <<< argc != 2 ?
+   0x080483ef <+27>:	je     0x80483fd <main+41>
+   0x080483f1 <+29>:	movl   $0x1,(%esp)            <<exit(1)
+   0x080483f8 <+36>:	call   0x8048304 <exit@plt>
+   0x080483fd <+41>:	mov    0xc(%ebp),%eax      <<< load arg's address
+   0x08048400 <+44>:	add    $0x4,%eax           <<< load arg[1]'s address
+   0x08048403 <+47>:	mov    (%eax),%eax         <<< load arg[1]'s value (pointer to string)
+   0x08048405 <+49>:	mov    %eax,0x4(%esp)      <<< set strcpy's 2nd arg
+   0x08048409 <+53>:	lea    0x18(%esp),%eax     <<< load buf's value (pointer to buffer)
+   0x0804840d <+57>:	mov    %eax,(%esp)         <<< set strcpy's 1st arg
+ * 0x08048410 <+60>:	call   0x80482f4 <strcpy@plt> <<< call strcyp(buf,arg[1])
+   0x08048415 <+65>: mov    0x9c(%esp),%eax     <<< load lpp
+   0x0804841c <+72>: mov    $0x0,%ax            <<< lpp & 0xffff0000
+   0x08048420 <+76>: cmp    $0x8040000,%eax     <<< compare with $0x8040000
+   0x08048425 <+81>: je     0x8048433 <main+95>
+   0x08048427 <+83>: movl   $0x2,(%esp)            <<exit(2)
+   0x0804842e <+90>: call   0x8048304 <exit@plt>   
+ * 0x08048433 <+95>: mov    0x9c(%esp),%eax     <<< if not equal $0x8040000
+   0x0804843a <+102>:   mov    (%eax),%eax      
+   0x0804843c <+104>:   mov    %eax,0x98(%esp)  <<< clear temp=0
+ * 0x08048443 <+111>:   mov    0x9c(%esp),%eax  <<< load &lpp
+   0x0804844a <+118>:   mov    (%eax),%eax      <<< $eax=*lpp
+   0x0804844c <+120>:   lea    0x18(%esp),%edx  <<< $edx=&buf
+ * 0x08048450 <+124>:   mov    %edx,(%eax)      <<< lp=*lpp=$edx=&buff <<< SEGFAULT
+   0x08048452 <+126>:   mov    0x9c(%esp),%eax  <<< load &lpp
+   0x08048459 <+133>:   mov    0x98(%esp),%edx  <<< load tmp
+   0x08048460 <+140>:   mov    %edx,(%eax)      <<< lp=*lpp=tmp
+   0x08048462 <+142>:   movl   $0x0,(%esp)         <<exit(0)
+   0x08048469 <+149>:   call   0x8048304 <exit@plt>
+End of assembler dump.
+
+Dump of assembler code for function strcpy@plt:
+   0x080482f4 <+0>:  jmp    *0x8049628
+   0x080482fa <+6>:  push   $0x10
+   0x080482ff <+11>: jmp    0x80482c4
+End of assembler dump.
+(gdb) disas 0x8049628
+Dump of assembler code for function _GLOBAL_OFFSET_TABLE_:
+   0x08049614 <+0>:  dec    %eax
+   0x08049615 <+1>:  xchg   %eax,%ebp
+   0x08049616 <+2>:  add    $0x8,%al
+   0x08049618 <+4>:  sbb    %bl,%cl
+   0x0804961a <+6>:  push   %edi
+   0x0804961c <+8>:  pusha  
+   0x0804961d <+9>:  aas    
+   0x0804961e <+10>: push   %edi
+   0x08049620 <+12>: fiaddl -0x62aff7fc(%edx)
+   0x08049626 <+18>: call   0xc879122
+   0x0804962b <+23>: or     %cl,(%edx)
+   0x0804962d <+25>: addl   $0x0,(%eax,%ecx,1)
+End of assembler dump.
+
+Dump of assembler code for function exit@plt:
+=> 0x08048304 <+0>:  jmp    *0x804962c
+   0x0804830a <+6>:  push   $0x18
+   0x0804830f <+11>: jmp    0x80482c4
+End of assembler dump.

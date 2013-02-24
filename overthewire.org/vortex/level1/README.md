@@ -115,4 +115,4 @@ OTHER WORK:
 		- easy to navigate and override the process flow. I can set any register to be anything as I want. 
 		- the flaw is, when 'gdb' starts, it starts with our EUID (which is vortex1). When it spawn /vortex/vortex1 afterward, the process also has EUID=vortex1, which leads to /bin/sh to get the same EUID as vortex1 too.
 
-	23anbT\rE
+	

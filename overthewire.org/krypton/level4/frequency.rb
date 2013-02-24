@@ -2,7 +2,7 @@
 
 table = {}
 
-files = ['c5']
+files = ['c0']
 
 data=''
 files.each do |file|

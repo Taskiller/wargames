@@ -1,0 +1,31 @@
+Dump of assembler code for function main:
+   0x08048404 <+0>:	push   %ebp
+   0x08048405 <+1>:	mov    %esp,%ebp
+=> 0x08048407 <+3>:	and    $0xfffffff0,%esp
+   0x0804840a <+6>:	sub    $0x90,%esp
+   0x08048410 <+12>:	cmpl   $0x1,0x8(%ebp)
+   0x08048414 <+16>:	jne    0x8048438 <main+52>
+   0x08048416 <+18>:	mov    0xc(%ebp),%eax
+   0x08048419 <+21>:	mov    (%eax),%edx
+   0x0804841b <+23>:	mov    $0x8048530,%eax
+   0x08048420 <+28>:	mov    %edx,0x4(%esp)
+   0x08048424 <+32>:	mov    %eax,(%esp)
+   0x08048427 <+35>:	call   0x8048324 <printf@plt>
+   0x0804842c <+40>:	movl   $0x1,(%esp)
+   0x08048433 <+47>:	call   0x8048334 <exit@plt>
+   0x08048438 <+52>:	mov    0xc(%ebp),%eax
+   0x0804843b <+55>:	add    $0x4,%eax
+   0x0804843e <+58>:	mov    (%eax),%eax
+   0x08048440 <+60>:	mov    %eax,0x4(%esp)
+   0x08048444 <+64>:	lea    0x10(%esp),%eax
+   0x08048448 <+68>:	mov    %eax,(%esp)
+   0x0804844b <+71>:	call   0x8048314 <strcpy@plt>
+   0x08048450 <+76>:	mov    $0x8048544,%eax
+   0x08048455 <+81>:	lea    0x10(%esp),%edx
+   0x08048459 <+85>:	mov    %edx,0x4(%esp)
+   0x0804845d <+89>:	mov    %eax,(%esp)
+   0x08048460 <+92>:	call   0x8048324 <printf@plt>
+   0x08048465 <+97>:	mov    $0x0,%eax
+   0x0804846a <+102>:	leave  
+   0x0804846b <+103>:	ret    
+End of assembler dump.
