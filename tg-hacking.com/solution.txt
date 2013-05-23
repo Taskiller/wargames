@@ -1,0 +1,126 @@
+1: http://hackertest.tg-hacking.com/
+	view source, javascript inside <head>
+	pwd = head
+
+2: http://hackertest.tg-hacking.com/head.htm
+	pop-up appears, click cancel and view source
+	password is inside <head>
+	pwd = l7l
+	
+3: http://hackertest.tg-hacking.com/l7l.htm
+	again, pop up password form
+	view source, and see this in javascript tag
+		pw=window.document.alinkColor;
+	try it on javascript console, or just alert to see that it is "#F45621"
+		pwd = #F45621
+
+4-5: http://hackertest.tg-hacking.com/abrae.htm
+	this will have a link (http://hackertest.tg-hacking.com/sdrawkcab.htm) to click.
+	when click, it displays the same pop-up but it will redirect back immediately if click cancel, or wrong password
+	The solution is either disable javascript for this page to disable redirect back, or download the page to read source code.
+		curl http://hackertest.tg-hacking.com/sdrawkcab.htm
+	The source code will have this line
+		if (pass=="superdoo") {
+	so,
+	pwd = superdoo
+
+6: http://hackertest.tg-hacking.com/save_as.htm
+	view source and see the line
+		<SCRIPT SRC="psswd.js" LANGUAGE="JavaScript" type="text/javascript">
+	download that psswd.js file to see the code inside
+	pwd = tghacker
+
+7: http://hackertest.tg-hacking.com/pwd7.php
+	zoom in /images/included.gif which is shown in <body bg='images/included.gif'>
+	it says user & password in the bottom of the image
+	user = phat
+	pwd = jerkybar3
+
+8: http://hackertest.tg-hacking.com/phat.php
+	zoom in /images/phat.gif which is shown in <body bg='images/phat.gif'>
+	says, see the .photoshop file, so download images/phat.psd
+	open with Photoshop or Gimp
+	it says too many watermarks.
+	hide the layers in layer toolbox to see user & passwd
+	user = zadmin
+	pwd = stebbins
+
+9: http://hackertest.tg-hacking.com/ninelvl.htm
+	see javascript source code, 
+		pw=String.fromCharCode(116,103,104,97,99,75);
+	use javascript to convert to type-able string
+	pw = tghacK
+
+10: http://hackertest.tg-hacking.com/YZOaA.php
+	read between <i>..</i> and construct string from it (all in lowercase)
+	pwd = shackithalf
+	it would say some error, just ignore it and Ctrl+A to highlight screen to see next level
+
+11: http://hackertest.tg-hacking.com/hahaha.php
+	highlight screen using Ctrl+A to see hidden word
+		base 64 decrypt and add .php hahaha grean eWVhdGdO decrypt
+	using base64 decoder to decrypt 'eWVhdGdO' to be 'yeatgN'
+	It supposes to be 'yeatgN.php', but it's actually 'http://hackertest.tg-hacking.com/yeatgh.php'
+
+	but looking in the folder that contains logo.png
+	found /images/love.png 
+	which after download and open with text-editor, it says 'omfg.php' which is level 14
+
+12: http://hackertest.tg-hacking.com/yeatgh.php
+	view source and read between <i>..</i>, it reads, encrypt with base64 atom128
+	and from hint KJ0IpxStLoL4+Hh3fiB1+GJqgirTM5PkK4TipgBgDj0XiGh3fiB2MhBogy6MiGuZ
+	decrypt it with atom128 (e.g. from http://crypo.in.ua/tools/eng_atom128c.php)
+	will get, cGFzc3dvcmQlMjAlM0QlMjB5b3VyJTIwaXAlMjBhZGRyZXNz
+	and decrypt that with base64
+	will get, 
+		password = your ip address
+	enter your own ip address (get it from http://ifconfig.me/ip) in the text box and submit
+	It'd says "wrong", but Ctrl+A to highlight and see the next level
+
+13:	http://hackertest.tg-hacking.com/ghost.php
+	it has a broken image on the page, with the tag 
+		<img src="love.png" alt="Smiley face" height="42" width="42">
+	download the image (/images/love.png) and open it with text editor (notepad, gedit, vim)
+	and next level is inside
+
+14: http://hackertest.tg-hacking.com/omfg.php
+	when the text box is disabled, make it enable by either using Chrome debugger or javascript
+		document.forms[0].elements[0].disabled=false
+	type in the password 'hotbabe' and submit
+
+15: http://hackertest.tg-hacking.com/superman.php
+	it says, in php, it displays something like $_GET['password']|$password
+	what if we input '$password'
+	since it doesn't allow to type longer than 5 chars, inject it in URL
+	getting 
+	pwd = supermaniscool
+	try the password to get to next page
+
+16: http://hackertest.tg-hacking.com/ipm0.php
+	it says IP doesn't match with what in the hidden field.
+	So, change the IP in the hidden field to be our own IP (see it from http://ifconfig.me)
+	and press "Show Message" to submit
+
+17: http://hackertest.tg-hacking.com/bananasplit.php
+	it says A=bypass on the page
+	Since it looks like a variable 'A', put it as a GET parameter, like this
+		http://hackertest.tg-hacking.com/bananasplit.php?A=bypass
+	The new page will not have the word "password is wrong" anymore.
+	instead, Ctrl+A to reveal a word "megan35feron74"
+	Spliting in half, it says megan35 and feron74. Both are encoding algorithm
+	So we have the broken iframe tag with URL like a crypted word 'PvsNNuynDcDg8nOhPusyRzlWucT4'
+	apply Feron-74 decoder first(http://crypo.in.ua/tools/eng_feron74d.php), 
+	then Megan-35 decoder(http://crypo.in.ua/tools/eng_megan35c.php),
+	will see the plain text which is 
+		chocosundae.php
+	
+	go to http://hackertest.tg-hacking.com/chocosundae.php
+	It says 'A password will be displayed after your HTTP UA is "TGH".'
+	Change your 'User-Agent' header = 'TGH' using add-on on Firefox, or curl -A and open the old page again with A=bypass
+		curl -A 'TGH' 'http://hackertest.tg-hacking.com/bananasplit.php?A=bypass'
+	see the password
+		password = l17c
+	type in 'l17c' and submit, the next page appears
+
+18: http://hackertest.tg-hacking.com/eclair.php
+	404 PAGE NOT FOUND
