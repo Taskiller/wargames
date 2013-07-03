@@ -1,0 +1,15 @@
+http://ipwned.it/challenge/1.html
+...
+...
+
+http://ipwned.it/challenge/2.html
+key:d###########r
+hints: 
+ - generalized meaning of doppelganger
+ - file extensions
+
+http://ipwned.it/challenge/3.html
+key:0############p
+hints:
+ - when writing a text file in linux and suddenly closed the program, what's
+   left?
