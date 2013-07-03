@@ -1,6 +1,10 @@
 http://ipwned.it/challenge/1.html
-...
-...
+key:g##################s
+hints:
+ - read every word in the challenge page carefully, especially the bold ones
+ - remind the words above everytime you progress to a next step
+ - don't forget to view source, especially the comments
+ - the answer is not on the web
 
 http://ipwned.it/challenge/2.html
 key:d###########r
@@ -13,3 +17,4 @@ key:0############p
 hints:
  - when writing a text file in linux and suddenly closed the program, what's
    left?
+
