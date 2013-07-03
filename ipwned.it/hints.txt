@@ -18,3 +18,9 @@ hints:
  - when writing a text file in linux and suddenly closed the program, what's
    left?
 
+http://ipwned.it/challenge/4.html
+hints:
+ - max characters used by the submitted page is only 4 characters anyway
+ - there are several ways to input a number (in programming language)
+ - try floating point?
+
