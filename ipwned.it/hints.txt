@@ -30,4 +30,14 @@ key:L###################E
 hints:
  - the key is simply inside the file
 
+https://www.dropbox.com/s/sh1ulzkn3pssp60/elf2
+key:d################c?
+hints:
+ - there is one fake key inside the file
+ - use gdb to try to see what is in the stack
 
+https://www.dropbox.com/s/9fltuosq6xl5p60/elf3
+key:h#################t?
+hints:
+ - really debug using gdb
+ - it's in the stack
